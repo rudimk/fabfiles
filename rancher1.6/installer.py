@@ -13,3 +13,9 @@ def installHelperPackages(conn):
 def addDockerRepo(conn):
     keyResult = conn.run('curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -')
     addRepoResult = conn.run('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"')
+
+def installDocker(conn):
+    installResult = conn.run('sudo apt-get update && sudo apt-get install -y docker-ce')
+    groupResult = conn.run('sudo groupadd docker')
+    gpasswdResult = conn.run('sudo gpasswd -a $USER docker')
+    serviceResult = conn.run('sudo systemctl restart docker.service')
