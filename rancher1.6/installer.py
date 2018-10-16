@@ -19,3 +19,11 @@ def installDocker(conn):
     groupResult = conn.run('sudo groupadd docker')
     gpasswdResult = conn.run('sudo gpasswd -a $USER docker')
     serviceResult = conn.run('sudo systemctl restart docker.service')
+
+
+if __name__ == '__main__':
+    conn = connectSSH()
+    updatePackages(conn)
+    installHelperPackages(conn)
+    addDockerRepo(conn)
+    installDocker(conn)
