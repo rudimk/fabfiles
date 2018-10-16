@@ -16,7 +16,6 @@ def addDockerRepo(conn):
 
 def installDocker(conn):
     installResult = conn.run('sudo apt-get update && sudo apt-get install -y docker-ce')
-    groupResult = conn.run('sudo groupadd docker')
     gpasswdResult = conn.run('sudo gpasswd -a $USER docker')
     serviceResult = conn.run('sudo systemctl restart docker.service')
 
